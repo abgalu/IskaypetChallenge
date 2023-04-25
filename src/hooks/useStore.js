@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { BASE_URL } from '../shared/constants';
+import { BASE_URL, DEFAULT_STORES } from '../shared/constants';
 
 const useStore = () => {
   const [error, setError] = useState('');
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState(DEFAULT_STORES);
 
   const addFavoriteTask = async (storeId, taskId) => {
     const url = `${BASE_URL}/checkin`;

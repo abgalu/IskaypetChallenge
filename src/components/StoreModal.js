@@ -9,9 +9,11 @@ import {
   View,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 import { StoreContext } from '../contexts/StoreContext';
 import { BUTTON, MODAL } from '../shared/constants'
+import { mapStyle } from '../shared/mapStyle';
 import { getMapConfig, getPrincipalName } from '../shared/utils';
 
 const StoreModal = ({ closeModal, isModalVisible, storeData }) => {
@@ -39,8 +41,8 @@ const StoreModal = ({ closeModal, isModalVisible, storeData }) => {
   const handleTaskPress = (storeId, taskId) => addFavoriteTask(storeId, taskId);
 
   /*
-    * Disabled due to constant 404 errors
-    */
+   * Disabled due to constant 404 errors
+   */
   // useEffect(() => {
   //   if (error) {
   //     Alert.alert(
@@ -88,6 +90,26 @@ const StoreModal = ({ closeModal, isModalVisible, storeData }) => {
             <Text>{MODAL.ADDRESS}:</Text>
             <Text>{direction}</Text>
           </View>
+          <MapView
+            customMapStyle={mapStyle}
+            initialRegion={{
+              latitude: 41.3995345,
+              longitude: 2.1909796,
+              latitudeDelta: 0.003,
+              longitudeDelta: 0.003,
+            }}
+            mapType="standard"
+            provider={PROVIDER_GOOGLE}
+            style={styles.mapStyle}
+          >
+            <Marker
+              key={id}
+              coordinate={{
+                latitude: coordinate.lat,
+                longitude: coordinate.lng,
+              }}
+            ></Marker>
+          </MapView>
           <Button
             onPress={() => handleRedirect(coordinate)}
             title={BUTTON.MAPS_REDIRECT}
@@ -104,6 +126,11 @@ const styles = StyleSheet.create({
   },
   closeButtonText: {
     padding: 20,
+  },
+  mapStyle: {
+    width: "100%",
+    height: 300,
+    marginVertical: 20,
   },
   modal: {
     backgroundColor: "#fff",
