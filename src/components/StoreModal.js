@@ -77,7 +77,11 @@ const StoreModal = ({ closeModal, isModalVisible, storeData }) => {
             {tasks.map(task => (
               <View key={task.id}>
                 <Pressable onPress={() => handleTaskPress(id, task.id)}>
-                  <Text>{task.description}</Text>
+                  <Text
+                    style={[styles.taskButton, task.assigned && styles.assigned]}
+                  >
+                    {task.description}
+                  </Text>
                 </Pressable>
               </View>
             ))}
@@ -121,6 +125,10 @@ const StoreModal = ({ closeModal, isModalVisible, storeData }) => {
 };
 
 const styles = StyleSheet.create({
+  assigned: {
+    backgroundColor: 'red',
+    color: 'white',
+  },
   closeButton: {
     alignSelf: "flex-end",
   },
@@ -144,6 +152,14 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  taskButton: {
+    borderColor: 'red',
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    fontSize: 20,
+    padding: 20,
+    textAlign: 'center',
   },
   schedule: {
     marginBottom: 10,

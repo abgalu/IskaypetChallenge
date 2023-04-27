@@ -18,6 +18,7 @@ export const DEFAULT_STORES = [
         lat: 41.3995345,
         lng: 2.1909796,
       },
+      direction: 'Example direction',
     },
     id: '1234',
     name: 'Tiendanimal',

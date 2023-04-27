@@ -27,7 +27,7 @@ const useStore = () => {
       const storeIndex = storesCopy.findIndex(store => store.id === storeId);
       const taskIndex = stores[storeIndex]?.tasks?.findIndex(task => task.id === taskId);
 
-      storesCopy[storeIndex].tasks[taskIndex].assigned = true;
+      storesCopy[storeIndex].tasks[taskIndex].assigned = !storesCopy[storeIndex].tasks[taskIndex].assigned;
       setStores(storesCopy);
     } catch ({ message }) {
       setError(message); 
